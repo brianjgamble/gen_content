@@ -18,7 +18,9 @@ defmodule GenContent.Crawler do
 
     content_path
     |> get_files()
-    |> Enum.map(fn file_name -> Task.async(fn -> parse_file(content_path, file_name, parser) end) end)
+    |> Enum.map(fn file_name ->
+      Task.async(fn -> parse_file(content_path, file_name, parser) end)
+    end)
     |> Enum.map(&Task.await/1)
     |> Enum.sort(&parser.sort/2)
   end
@@ -36,6 +38,6 @@ defmodule GenContent.Crawler do
     content_path
     |> Path.join(file_name)
     |> File.read!()
-    |> parser.compile()
+    |> parser.compile(file_name)
   end
 end
