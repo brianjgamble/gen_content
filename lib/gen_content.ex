@@ -2,12 +2,14 @@ defmodule GenContent do
   @moduledoc """
   Documentation for `GenContent`.
   """
+  alias GenContent.Content
   alias GenContent.Crawler
+
   use GenServer
 
-  #def start_link(module, _init_arg) do
-  #  GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
-  #end
+  def start_link(args) do
+    GenServer.start_link(__MODULE__, args.store, name: args.name)
+  end
 
   @impl true
   def init(store) do
@@ -30,8 +32,9 @@ defmodule GenContent do
   @doc """
   Returns the list of content.
   """
-  def list_content do
-    GenServer.call(__MODULE__, {:list_content})
+  @spec list_content(atom()) :: {:ok, list(Content.t())}
+  def list_content(name) do
+    GenServer.call(name, {:list_content})
   end
 
   @doc """
@@ -39,7 +42,8 @@ defmodule GenContent do
 
   Returns `:not_found` if the content does not exist.
   """
-  def fetch_content(slug) do
-    GenServer.call(__MODULE__, {:fetch_content, slug})
+  @spec fetch_content(atom(), binary()) :: Content.t() | :not_found
+  def fetch_content(name, slug) do
+    GenServer.call(name, {:fetch_content, slug})
   end
 end
