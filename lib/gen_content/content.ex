@@ -5,7 +5,7 @@ defmodule GenContent.Content do
 
   @type t :: %__MODULE__{
           slug: binary(),
-          title: boolean,
+          title: binary(),
           date: binary(),
           text: binary()
         }
