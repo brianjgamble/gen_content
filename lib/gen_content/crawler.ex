@@ -1,16 +1,21 @@
 defmodule GenContent.Crawler do
-  @moduledoc false
+  @moduledoc """
+  Converts files into content.
+  """
 
   require Logger
 
   alias GenContent.Content
 
   @doc """
-  Gets a list of files on the `content_path` from the given store, compiles
-  each file found, and returns a sorted list of compiled files.
+  Takes a list of content files, converts each, and returns a sorted list
+  of `GenContent.Content`.
+
+  The content location and parser is provided by the given `GenContent.Store`.
+  If the store is `nil`, an empty list is returned.
   """
   @spec crawl(module()) :: list(Content.t())
-  def crawl(nil), do: {:ok, []}
+  def crawl(nil), do: []
 
   def crawl(store) do
     content_path = store.content_path()
