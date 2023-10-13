@@ -8,6 +8,6 @@ defmodule GenContent.Content do
           title: String.t(),
           date: String.t(),
           text: String.t(),
-          tags: List.t()
+          tags: list()
         }
 end
