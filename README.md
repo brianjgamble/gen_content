@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="300" src="gent_content_logo.png" alt="Logo">
+  <img width="300" src="gen_content_logo.png" alt="Logo">
 </p>
 
 ![GitHub](https://img.shields.io/github/license/brianjgamble/gen_content)
