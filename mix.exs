@@ -22,7 +22,8 @@ defmodule GenContent.MixProject do
   defp deps do
     [
       {:credo, "~> 1.7", only: :dev},
-      {:dialyxir, "~> 1.4", only: [:dev], runtime: false}
+      {:dialyxir, "~> 1.4", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.30.7", only: :dev, runtime: false}
     ]
   end
 end
