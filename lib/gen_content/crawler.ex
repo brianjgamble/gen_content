@@ -43,6 +43,6 @@ defmodule GenContent.Crawler do
     content_path
     |> Path.join(file_name)
     |> File.read!()
-    |> parser.compile(file_name)
+    |> parser.compile()
   end
 end

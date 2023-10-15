@@ -6,10 +6,9 @@ defmodule GenContent.Parser do
   alias GenContent.Content
 
   @doc """
-  Returns a `Content` struct given a file's contents (`text`) and
-  name (`file_name`).
+  Returns a `GenContent.Content` struct compiled from the given string.
   """
-  @callback compile(text :: String.t(), file_name :: String.t()) :: Content.t()
+  @callback compile(String.t()) :: Content.t()
 
   @doc """
   Compares two content structs.
