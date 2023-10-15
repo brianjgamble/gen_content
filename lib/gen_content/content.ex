@@ -19,7 +19,7 @@ defmodule GenContent.Content do
           title: String.t(),
           date: Date.t() | nil,
           text: String.t(),
-          tags: list()
+          tags: list(String.t())
         }
 
   @doc """
