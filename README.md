@@ -6,7 +6,7 @@
 
 # GenContent
 
-A simple, content management tool that utiziles GenServer to store and retrieve
+A simple, content management tool that uses GenServer to store and retrieve
 compiled content.
 
 ## Installation
