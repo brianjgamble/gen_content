@@ -1,6 +1,13 @@
+<p align="center">
+  <img width="300" src="gent_content_logo.png" alt="Logo">
+</p>
+
+![GitHub](https://img.shields.io/github/license/brianjgamble/gen_content)
+
 # GenContent
 
-**TODO: Add description**
+A simple, content management tool that utiziles GenServer to store and retrieve
+compiled content.
 
 ## Installation
 
@@ -13,8 +20,4 @@ def deps do
   ]
 end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/gen_content>.
 
