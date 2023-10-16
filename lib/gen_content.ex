@@ -7,8 +7,36 @@ defmodule GenContent do
 
   use GenServer
 
-  def start_link(args) do
-    GenServer.start_link(__MODULE__, args.store, name: args.name)
+  @typedoc """
+  A two element tuple representing the arguments required to start GenContent.
+
+  The first element is the name and the second is the module for
+  a `GenContent.Store`.
+
+  ## Example
+
+    {:blog, BlogStore}
+  """
+  @type args :: {atom(), module()}
+
+  @spec child_specification(atom(), atom(), module()) :: map()
+  def child_specification(id, name, store) do
+    %{
+      id: id,
+      start: {GenContent, :start_link, [{name, store}]}
+    }
+  end
+
+  @doc """
+  Starts the GenServer process with the given arguments.
+  """
+  @spec start_link(args()) :: GenServer.on_start()
+  def start_link({name, store}) when is_atom(name) do
+    GenServer.start_link(__MODULE__, store, name: name)
+  end
+
+  def start_link(_args) do
+    raise ArgumentError, message: "name must be an atom"
   end
 
   @impl true
