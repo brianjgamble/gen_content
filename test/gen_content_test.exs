@@ -8,6 +8,7 @@ defmodule GenContentTest do
     test "creates a child specification map" do
       map = GenContent.child_spec({:blog, FakeStore})
 
+      assert is_map(map)
       assert map.id == :id_blog
       assert map.start == {GenContent, :start_link, [{:blog, FakeStore}]}
     end
