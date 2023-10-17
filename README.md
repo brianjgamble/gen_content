@@ -2,9 +2,8 @@
   <img width="300" src="gen_content_logo.png" alt="Logo">
 </p>
 
-![GitHub](https://img.shields.io/github/license/brianjgamble/gen_content)
-
 # GenContent
+![GitHub](https://img.shields.io/github/license/brianjgamble/gen_content)
 
 A simple, content management tool that uses GenServer to store and retrieve
 compiled content.
@@ -34,7 +33,7 @@ Let's imagine you have blog content with a custom store of `MyApp.BlogStore`.
 We'll add a GenContent entry to the list of children so the blog content will 
 be loaded and parsed.  The entry is a two element tuple containing the module 
 `GenContent` and another tuple with a name (an `atom`) for the content and 
-the module for the implemented content store (`GenContent.Store`).
+the module of the implemented content store (`GenContent.Store`).
 
 ```elixir
 # Usually in application.ex within the function start
