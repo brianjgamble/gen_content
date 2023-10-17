@@ -24,32 +24,39 @@ end
 ## Usage
 
 To load content in your application, implement a `GenContent.Store` and a 
-`GenContent.Parser`.  Then, add your custom store(s) to the list of supervisor 
-children in `application.ex`.
+`GenContent.Parser`.  Then, add an entry for your content in the list of 
+supervisor children in `application.ex`.
 
 ### Example
 
 Let's imagine you have blog content with a custom store of `MyApp.BlogStore`.
 
-We'll add the store to the list of children with an id of `:content_1` and a 
-name of `:blog`:
+We'll add a GenContent entry to the list of children so the blog content will 
+be loaded and parsed.  The entry is a two element tuple containing the module 
+`GenContent` and another tuple with a name (an `atom`) for the content and 
+the module for the implemented content store (`GenContent.Store`).
 
 ```elixir
 # Usually in application.ex within the function start
 
 children = [
   # other workers
-  GenContent.child_specification(:content_1, :blog, MyApp.BlogStore)
+  {GenContent, {:blog, MyApp.BlogStore}}
 ]
 ```
 
-To list the blog content, use `list_content/1` with the name given in the 
-child specification:
+To access your content, you have two functions available:
+
+- `list_content/1`
+- `fetch_content/2`
+
+To list all of the blog content, provide the name of your content: 
 ```elixir
 GenContent.list_content(:blog)
 ```
 
-To fetch blog content, provide the name and the `slug` of the blog content: 
+To fetch blog content, provide the name and the content's `slug` (see
+`GenContent.Content`): 
 ```elixir
 GenContent.fetch_content(:blog, "first-post")
 ```

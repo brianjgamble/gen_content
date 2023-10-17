@@ -19,12 +19,19 @@ defmodule GenContent do
   """
   @type args :: {atom(), module()}
 
-  @spec child_specification(atom(), atom(), module()) :: map()
-  def child_specification(id, name, store) do
+  @doc """
+  Creates the child specification map for GenContent.
+  """
+  @spec child_spec(args()) :: map()
+  def child_spec({name, store}) when is_atom(name) do
     %{
-      id: id,
+      id: :"id_#{name}",
       start: {GenContent, :start_link, [{name, store}]}
     }
+  end
+
+  def child_spec(_args) do
+    raise ArgumentError, message: "name must be an atom"
   end
 
   @doc """
@@ -33,10 +40,6 @@ defmodule GenContent do
   @spec start_link(args()) :: GenServer.on_start()
   def start_link({name, store}) when is_atom(name) do
     GenServer.start_link(__MODULE__, store, name: name)
-  end
-
-  def start_link(_args) do
-    raise ArgumentError, message: "name must be an atom"
   end
 
   @impl true

@@ -4,12 +4,18 @@ defmodule GenContentTest do
 
   alias GenContent.FakeStore
 
-  describe "child_specification/3" do
-    test "creates a child specification map for a supervisor" do
-      map = GenContent.child_specification(:test_id, :blog, FakeStore)
+  describe "child_spec/1" do
+    test "creates a child specification map" do
+      map = GenContent.child_spec({:blog, FakeStore})
 
-      assert map.id == :test_id
+      assert map.id == :id_blog
       assert map.start == {GenContent, :start_link, [{:blog, FakeStore}]}
+    end
+
+    test "name must be an atom" do
+      assert_raise ArgumentError, "name must be an atom", fn ->
+        GenContent.child_spec({"blog", FakeStore})
+      end
     end
   end
 
@@ -22,14 +28,6 @@ defmodule GenContentTest do
     test "store can be nil" do
       args = {:foo, nil}
       assert {:ok, _pid} = GenContent.start_link(args)
-    end
-
-    test "name must be an atom" do
-      args = {"foo", FakeStore}
-
-      assert_raise ArgumentError, "name must be an atom", fn ->
-        assert {:ok, _pid} = GenContent.start_link(args)
-      end
     end
   end
 end
